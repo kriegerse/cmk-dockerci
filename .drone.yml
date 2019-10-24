@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: default
+name: cmk150
 
 steps:
 - name: cmk-150-docker
@@ -17,6 +17,12 @@ steps:
       - cmk150-latest
     dockerfile: Dockerfile-cmk150
 
+---
+kind: pipeline
+type: docker
+name: cmk160
+
+steps:
 - name: cmk-160-docker
   image: plugins/docker
   settings:
