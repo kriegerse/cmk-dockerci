@@ -1,0 +1,31 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: cmk-150-docker
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: kriegerse/cmk
+    tags:
+      - cmk150-${DRONE_BUILD_NUMBER}
+      - cmk150-latest
+    dockerfile: Dockerfile-cmk150
+
+- name: cmk-160-docker
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: kriegerse/cmk
+    tags:
+      - cmk160-${DRONE_BUILD_NUMBER}
+      - cmk160-latest
+    dockerfile: Dockerfile-cmk160

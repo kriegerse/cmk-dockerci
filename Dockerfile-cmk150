@@ -1,0 +1,6 @@
+FROM checkmk/check-mk-raw:1.5.0-latest
+
+RUN apt-get update
+RUN apt-get install -y sudo
+RUN omd create --no-tmpfs cmk
+RUN sudo -i -u cmk pip install  --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org pylint
