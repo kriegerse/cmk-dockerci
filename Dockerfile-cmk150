@@ -1,6 +1,11 @@
-FROM checkmk/check-mk-raw:1.5.0-latest
+FROM opensuse/leap:15.1
 
-RUN apt-get update
-RUN apt-get install -y sudo
+RUN zypper ref
+RUN zypper -n in sudo python
+RUN zypper --no-gpg-checks -n in -l -y -f --allow-unsigned-rpm https://checkmk.de/support/1.5.0p22/check-mk-raw-1.5.0p22-sles15-38.x86_64.rpm
 RUN omd create --no-tmpfs cmk
-RUN sudo -i -u cmk pip install  --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org pylint
+RUN sudo -i -u cmk pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org pylint websocket-client
+
+# RUN
+#RUN rpm -iv https://checkmk.de/support/1.5.0p22/check-mk-raw-1.5.0p22-sles15-38.x86_64.rpm
+#RUN omd create --no-tmpfs cmk
